@@ -1,0 +1,17 @@
+{
+  "name": "yes",
+  "version": "1.0.0",
+  "description": "sample",
+  "main": "session2.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependency":{
+
+  },
+  "devdependency":{
+
+  },
+  "author": "",
+  "license": "ISC"
+}
