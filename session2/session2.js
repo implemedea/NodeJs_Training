@@ -16,6 +16,8 @@ app.get('/listusers', function(req,res){
 app.post('/addUsers', function(req,res){
     console.log(__dirname+'sample.json');
     fs.readFile(__dirname+'/sample.json','utf-8',function(err,data){
+        var data = JSON.parse(data);
+        
         console.log('err = '+err);
         console.log('data = '+data);
         res.end(data);

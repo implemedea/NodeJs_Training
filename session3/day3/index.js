@@ -1,8 +1,9 @@
-var express=require('express');
+var express = require('Express');
+var app = express();
 
-var app=express();
+var main = require('./route.js');
 
-app.get('/', function(req,res) {
-  res.send('Hello World');
-} );
+//both index.js and things.js should be in same directory
+app.use('/main', main);
+
 app.listen(3000);
