@@ -1,0 +1,161 @@
+Node.js Create Connection with MongoDB
+
+MongoDb is a NoSQL database. It can be used with Node.js as a database
+to insert and retrieve data.
+
+install mongodb in windows
+===========================
+npm install mongodb --save   
+
+
+
+Create a folder named "MongoDatabase" as a database. Suppose you create
+it on Desktop. Create a js file named "createdatabase.js" within that
+folder and having the following code:
+
+==============================================
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+if (err) throw err;  
+console.log("Database created!");  
+db.close();  
+});  
+
+===============================================
+Node.js MongoDB Create Collection
+MongoDB is a NoSQL database so data is stored in collection instead 
+of table. createCollection method is used to create a collection in MongoDB.
+
+Example
+
+Create a collection named "employees".
+
+Create a js file named "employees.js", having the following data:
+=================================================
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/ MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+if (err) throw err;  
+db.createCollection("employees", function(err, res) {  
+if (err) throw err;  
+console.log("Collection is created!");  
+db.close();  
+});  
+}); 
+================================================
+
+Node.js MongoDB Insert Record
+The insertOne method is used to insert record in MongoDB's collection. 
+The first argument of the insertOne method is an object which contains 
+the name and value of each field in the record you want to insert.
+
+Example
+
+(Insert Single record)
+
+Insert a record in "employees" collection.
+
+Create a js file named "insert.js", having the following code:
+================================================
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/ MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+if (err) throw err;  
+var myobj = { name: "Ajeet Kumar", age: "28", address: "Delhi" };  
+db.collection("employees").insertOne(myobj, function(err, res) {  
+if (err) throw err;  
+console.log("1 record inserted");  
+db.close();  
+});  
+});  
+==================================================
+Node.js MongoDB Select Record
+The findOne() method is used to select a single data from a collection
+ in MongoDB. This method returns the first record of the collection.
+
+Example
+
+(Select Single Record)
+
+Select the first record from the ?employees? collection.
+
+Create a js file named "select.js", having the following code:
+===================================================
+var http = require('http');  
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+  if (err) throw err;  
+  db.collection("employees").findOne({}, function(err, result) {  
+    if (err) throw err;  
+    console.log(result.name);  
+    db.close();  
+  });  
+});  
+====================================================
+Select Multiple Records
+The find() method is used to select all the records from collection
+in MongoDB.
+
+Example
+====================================================
+Select all the records from "employees" collection.
+Create a js file named "selectall.js", having the following code:
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+  if (err) throw err;  
+  db.collection("employees").find({}).toArray(function(err, result) {  
+    if (err) throw err;  
+    console.log(result);  
+    db.close();  
+  }); 
+====================================================
+ Node.js MongoDB Filter Query
+The find() method is also used to filter the result on a specific 
+parameter. You can filter the result by using a query object.
+
+Example
+
+Filter the records to retrieve the specific employee whose address is "Delhi".
+
+Create a js file named "query1.js", having the following code:
+});  
+====================================================
+var http = require('http');  
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+if (err) throw err;  
+var query = { address: "Delhi" };  
+db.collection("employees").find(query).toArray(function(err, result) {  
+if (err) throw err;  
+console.log(result);  
+db.close();  
+});  
+});
+=========================================================
+
+Node.js MongoDB Remove
+In MongoDB, you can delete records or documents by using the 
+remove() method. The first parameter of the remove() method is a 
+query object which specifies the document to delete.
+
+Example
+Remove the record of employee whose address is Ghaziabad.
+Create a js file named "remove.js", having the following code:  
+=========================================================
+var http = require('http');  
+var MongoClient = require('mongodb').MongoClient;  
+var url = "mongodb://localhost:27017/ MongoDatabase";  
+MongoClient.connect(url, function(err, db) {  
+if (err) throw err;  
+var myquery = { address: 'Ghaziabad' };  
+db.collection("employees").remove(myquery, function(err, obj) {  
+if (err) throw err;  
+console.log(obj.result.n + " record(s) deleted");  
+db.close();  
+});  
+});  
+=========================================================
